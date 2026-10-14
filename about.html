@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>About - Izzatiin</title>
+    <meta name="description" content="About Izzatiin, a product designer who starts every project with the people it serves." />
+    <meta property="og:title" content="About - Izzatiin" />
+    <meta property="og:description" content="About Izzatiin, a product designer who starts every project with the people it serves." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="assets/img/og-image.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#111113" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="assets/fonts/plus-jakarta-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("theme");
+          if (t === "light" || t === "dark") d.setAttribute("data-theme", t);
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="nav-sentinel" aria-hidden="true"></div>
+
+    <header class="site-nav">
+      <div class="container nav-inner">
+        <a class="wordmark" href="index.html">Izzatiin</a>
+        <nav class="nav-links" aria-label="Main">
+          <a href="index.html#work">Work</a>
+          <a href="about.html" aria-current="page">About</a>
+          <!-- GANTI: taruh file CV kamu di assets/resume.pdf -->
+          <a href="assets/resume.pdf" target="_blank" rel="noopener">Resume<svg class="icon" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg></a>
+          <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark mode" aria-pressed="false">
+            <svg class="icon icon-moon" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M233.54,142.23a8,8,0,0,0-8-2,88.08,88.08,0,0,1-109.8-109.8,8,8,0,0,0-10-10,104.84,104.84,0,0,0-52.91,37A104,104,0,0,0,136,224a103.09,103.09,0,0,0,62.52-20.88,104.84,104.84,0,0,0,37-52.91A8,8,0,0,0,233.54,142.23ZM188.9,190.34A88,88,0,0,1,65.66,67.11a89,89,0,0,1,31.4-26A106,106,0,0,0,96,56,104.11,104.11,0,0,0,200,160a106,106,0,0,0,14.92-1.06A89,89,0,0,1,188.9,190.34Z"/></svg>
+            <svg class="icon icon-sun" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M120,40V16a8,8,0,0,1,16,0V40a8,8,0,0,1-16,0Zm72,88a64,64,0,1,1-64-64A64.07,64.07,0,0,1,192,128Zm-16,0a48,48,0,1,0-48,48A48.05,48.05,0,0,0,176,128ZM58.34,69.66A8,8,0,0,0,69.66,58.34l-16-16A8,8,0,0,0,42.34,53.66Zm0,116.68-16,16a8,8,0,0,0,11.32,11.32l16-16a8,8,0,0,0-11.32-11.32ZM192,72a8,8,0,0,0,5.66-2.34l16-16a8,8,0,0,0-11.32-11.32l-16,16A8,8,0,0,0,192,72Zm5.66,114.34a8,8,0,0,0-11.32,11.32l16,16a8,8,0,0,0,11.32-11.32ZM48,128a8,8,0,0,0-8-8H16a8,8,0,0,0,0,16H40A8,8,0,0,0,48,128Zm80,80a8,8,0,0,0-8,8v24a8,8,0,0,0,16,0V216A8,8,0,0,0,128,208Zm112-88H216a8,8,0,0,0,0,16h24a8,8,0,0,0,0-16Z"/></svg>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- GANTI: semua teks dan foto di halaman ini dengan ceritamu sendiri -->
+      <section class="about-hero container" aria-labelledby="about-title">
+        <div>
+          <h1 id="about-title" data-reveal>Hello, I'm Izzatiin.</h1>
+          <div class="prose" data-reveal style="--i: 1">
+            <p>
+              I'm a product designer finishing my degree in <strong>Visual Communication Design</strong>. I care about products that respect people's time and attention, especially for people who are new to technology.
+            </p>
+            <p>
+              Last year I interned as a product designer at a <strong>fintech startup in Jakarta</strong>, working on onboarding and identity verification for a lending app. Before that, I freelanced on brand and website projects for small local businesses.
+            </p>
+            <p>
+              I'm happiest close to the people I design for: on a field visit, in a usability test, or reading through support tickets. Those moments shape most of my design decisions.
+            </p>
+          </div>
+        </div>
+        <figure data-reveal style="--i: 2">
+          <img src="assets/img/profile.jpg" alt="Portrait of Izzatiin" width="1200" height="1500" />
+        </figure>
+      </section>
+
+      <section class="section container" aria-labelledby="exp-title">
+        <div class="experience">
+          <h2 class="section-title" id="exp-title" data-reveal>Experience</h2>
+          <ol class="experience-list" role="list" data-reveal style="--i: 1">
+            <li>
+              <span class="when">Jun - Dec 2025</span>
+              <div>
+                <h3>Product Design Intern</h3>
+                <p>Fintech startup, Jakarta. Onboarding, identity verification, and design system components for a lending app.</p>
+              </div>
+            </li>
+            <li>
+              <span class="when">2024 - 2025</span>
+              <div>
+                <h3>Teaching Assistant, Interaction Design</h3>
+                <p>Ran weekly critique sessions and gave feedback on second-year student projects.</p>
+              </div>
+            </li>
+            <li>
+              <span class="when">2023 - 2024</span>
+              <div>
+                <h3>Freelance Designer</h3>
+                <p>Brand identities and websites for cafes and small businesses around campus.</p>
+              </div>
+            </li>
+            <li>
+              <span class="when">2022 - 2027</span>
+              <div>
+                <h3>B.Des. Visual Communication Design</h3>
+                <p>Focus on interaction design and user research. Expected to graduate in 2027.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section container" aria-labelledby="life-title">
+        <h2 class="section-title" id="life-title" data-reveal>Outside of work</h2>
+        <div class="life">
+          <figure data-reveal>
+            <img src="assets/img/about-1.jpg" alt="A photo from outside of work" width="1200" height="900" loading="lazy" />
+          </figure>
+          <figure data-reveal style="--i: 1">
+            <img src="assets/img/about-2.jpg" alt="Another photo from outside of work" width="1200" height="1500" loading="lazy" />
+          </figure>
+        </div>
+        <p class="life-caption" data-reveal>
+          When I'm not designing, I'm usually hunting for a new noodle spot, shooting film around my neighborhood, or playing badminton with friends on the weekend.
+        </p>
+      </section>
+    </main>
+
+    <!-- FOOTER / KONTAK: GANTI email, LinkedIn, dan link CV -->
+    <footer class="site-footer" id="contact">
+      <div class="container">
+        <div class="footer-cta" data-reveal>
+          <h2>Have a role or project in mind?</h2>
+          <p>I'm open to full-time product design roles. I usually reply within a day or two.</p>
+          <div class="footer-actions">
+            <a class="btn btn-primary" href="mailto:youremail@example.com"><svg class="icon" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48ZM203.43,64,128,133.15,52.57,64ZM216,192H40V74.19l82.59,75.71a8,8,0,0,0,10.82,0L216,74.19V192Z"/></svg>Say hello</a>
+            <a class="btn btn-ghost" href="https://www.linkedin.com/in/your-profile" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"/></svg>LinkedIn</a>
+            <a class="btn btn-ghost" href="assets/resume.pdf" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,82.34l-56-56A8,8,0,0,0,152,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V88A8,8,0,0,0,213.66,82.34ZM160,51.31,188.69,80H160ZM200,216H56V40h88V88a8,8,0,0,0,8,8h48V216Zm-32-80a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,136Zm0,32a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,168Z"/></svg>Resume</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; <span data-year>2026</span> Izzatiin</p>
+          <p>Designed and built by Izzatiin</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="assets/js/main.js" defer></script>
+  </body>
+</html>

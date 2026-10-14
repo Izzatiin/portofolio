@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- GANTI: nama, deskripsi, dan gambar share sesuai dirimu -->
+    <title>Izzatiin - Product Designer</title>
+    <meta name="description" content="Izzatiin is a product designer crafting digital experiences that feel human." />
+    <meta property="og:title" content="Izzatiin - Product Designer" />
+    <meta property="og:description" content="Product designer crafting digital experiences that feel human." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="assets/img/og-image.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#111113" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="assets/fonts/plus-jakarta-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("theme");
+          if (t === "light" || t === "dark") d.setAttribute("data-theme", t);
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="nav-sentinel" aria-hidden="true"></div>
+
+    <header class="site-nav">
+      <div class="container nav-inner">
+        <a class="wordmark" href="index.html">Izzatiin</a>
+        <nav class="nav-links" aria-label="Main">
+          <a href="#work" aria-current="page">Work</a>
+          <a href="about.html">About</a>
+          <!-- GANTI: taruh file CV kamu di assets/resume.pdf -->
+          <a href="assets/resume.pdf" target="_blank" rel="noopener">Resume<svg class="icon" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg></a>
+          <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark mode" aria-pressed="false">
+            <svg class="icon icon-moon" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M233.54,142.23a8,8,0,0,0-8-2,88.08,88.08,0,0,1-109.8-109.8,8,8,0,0,0-10-10,104.84,104.84,0,0,0-52.91,37A104,104,0,0,0,136,224a103.09,103.09,0,0,0,62.52-20.88,104.84,104.84,0,0,0,37-52.91A8,8,0,0,0,233.54,142.23ZM188.9,190.34A88,88,0,0,1,65.66,67.11a89,89,0,0,1,31.4-26A106,106,0,0,0,96,56,104.11,104.11,0,0,0,200,160a106,106,0,0,0,14.92-1.06A89,89,0,0,1,188.9,190.34Z"/></svg>
+            <svg class="icon icon-sun" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M120,40V16a8,8,0,0,1,16,0V40a8,8,0,0,1-16,0Zm72,88a64,64,0,1,1-64-64A64.07,64.07,0,0,1,192,128Zm-16,0a48,48,0,1,0-48,48A48.05,48.05,0,0,0,176,128ZM58.34,69.66A8,8,0,0,0,69.66,58.34l-16-16A8,8,0,0,0,42.34,53.66Zm0,116.68-16,16a8,8,0,0,0,11.32,11.32l16-16a8,8,0,0,0-11.32-11.32ZM192,72a8,8,0,0,0,5.66-2.34l16-16a8,8,0,0,0-11.32-11.32l-16,16A8,8,0,0,0,192,72Zm5.66,114.34a8,8,0,0,0-11.32,11.32l16,16a8,8,0,0,0,11.32-11.32ZM48,128a8,8,0,0,0-8-8H16a8,8,0,0,0,0,16H40A8,8,0,0,0,48,128Zm80,80a8,8,0,0,0-8,8v24a8,8,0,0,0,16,0V216A8,8,0,0,0,128,208Zm112-88H216a8,8,0,0,0,0,16h24a8,8,0,0,0,0-16Z"/></svg>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- HERO: perkenalan singkat -->
+      <section class="hero container" aria-labelledby="intro">
+        <h1 id="intro" data-enter style="--i: 0">Hi, I'm Izzatiin. A product designer crafting experiences that feel <em>human</em>.</h1>
+        <p class="hero-sub" data-enter style="--i: 1">
+          Final-year Visual Communication Design student, previously a product design intern at a fintech startup in Jakarta.
+        </p>
+        <p class="status" data-enter style="--i: 2"><span class="status-dot" aria-hidden="true"></span>Open to full-time roles</p>
+      </section>
+
+      <!-- KARYA: tiap kartu mengarah ke halaman studi kasus di folder work/ -->
+      <section class="work container" id="work" aria-labelledby="work-title">
+        <h2 class="section-title sr-only" id="work-title">Selected work</h2>
+
+        <div class="work-grid">
+          <a class="project project--feature" href="work/lintas.html" data-reveal>
+            <div class="project-media" style="--tint: #dce4ee">
+              <img src="assets/img/work/lintas-cover.jpg" alt="Lintas trip planner screens" width="1920" height="1200" />
+            </div>
+            <div class="project-info">
+              <div class="project-head">
+                <h3>Lintas</h3>
+                <span class="project-arrow" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" fill="currentColor"><path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg></span>
+              </div>
+              <p class="project-desc">A trip planner that helps first-time riders find their way on Jakarta's commuter rail without asking a stranger.</p>
+              <ul class="tags" role="list">
+                <li class="tag-accent">Capstone project</li>
+                <li>Mobile app</li>
+                <li>UX research</li>
+                <li>2026</li>
+              </ul>
+            </div>
+          </a>
+
+          <a class="project project--tall" href="work/warungku.html" data-reveal style="--i: 0">
+            <div class="project-media" style="--tint: #dde8df">
+              <img src="assets/img/work/warungku-cover.jpg" alt="Warungku bookkeeping app screens" width="1200" height="1500" loading="lazy" />
+            </div>
+            <div class="project-info">
+              <div class="project-head">
+                <h3>Warungku</h3>
+                <span class="project-arrow" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" fill="currentColor"><path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg></span>
+              </div>
+              <p class="project-desc">Simple bookkeeping for family-run shops, designed with owners who had never used a finance app.</p>
+              <ul class="tags" role="list">
+                <li>Mobile app</li>
+                <li>Service design</li>
+                <li>2025</li>
+              </ul>
+            </div>
+          </a>
+
+          <a class="project project--square" href="work/rawat.html" data-reveal style="--i: 1">
+            <div class="project-media" style="--tint: #efe0e0">
+              <img src="assets/img/work/rawat-cover.jpg" alt="Rawat medication reminder screens" width="1200" height="1200" loading="lazy" />
+            </div>
+            <div class="project-info">
+              <div class="project-head">
+                <h3>Rawat</h3>
+                <span class="project-arrow" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" fill="currentColor"><path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg></span>
+              </div>
+              <p class="project-desc">Shared medication reminders for elderly parents and the adult children who look after them.</p>
+              <ul class="tags" role="list">
+                <li>Product design</li>
+                <li>Accessibility</li>
+                <li>2025</li>
+              </ul>
+            </div>
+          </a>
+
+          <!-- Proyek rahasia (NDA). Hapus blok ini kalau tidak perlu. -->
+          <div class="project--locked" data-reveal>
+            <span class="lock" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" fill="currentColor"><path d="M208,80H176V56a48,48,0,0,0-96,0V80H48A16,16,0,0,0,32,96V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V96A16,16,0,0,0,208,80ZM96,56a32,32,0,0,1,64,0V80H96ZM208,208H48V96H208V208Z"/></svg></span>
+            <div>
+              <h3>Loan app onboarding</h3>
+              <p>Internship work on identity verification for a lending app. It is under NDA, so I share it in a call. <a href="mailto:youremail@example.com?subject=Case%20study%20request">Request the case study</a></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TENTANG: ringkasan singkat, detail lengkap ada di about.html -->
+      <section class="section container" aria-labelledby="about-title">
+        <div class="about-teaser">
+          <figure data-reveal>
+            <img src="assets/img/profile.jpg" alt="Portrait of Izzatiin" width="1200" height="1500" loading="lazy" />
+          </figure>
+          <div data-reveal style="--i: 1">
+            <h2 id="about-title">I like turning messy, everyday problems into calm, simple products.</h2>
+            <p>
+              Most of my work starts with conversations: riding trains with commuters, sitting behind a shop counter, or calling parents about their medicine. I sketch, prototype in Figma, and test early so the details come from real people.
+            </p>
+            <a class="text-link" href="about.html"><span>More about me</span><svg class="icon" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg></a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER / KONTAK: GANTI email, LinkedIn, dan link CV -->
+    <footer class="site-footer" id="contact">
+      <div class="container">
+        <div class="footer-cta" data-reveal>
+          <h2>Have a role or project in mind?</h2>
+          <p>I'm open to full-time product design roles. I usually reply within a day or two.</p>
+          <div class="footer-actions">
+            <a class="btn btn-primary" href="mailto:youremail@example.com"><svg class="icon" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48ZM203.43,64,128,133.15,52.57,64ZM216,192H40V74.19l82.59,75.71a8,8,0,0,0,10.82,0L216,74.19V192Z"/></svg>Say hello</a>
+            <a class="btn btn-ghost" href="https://www.linkedin.com/in/your-profile" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"/></svg>LinkedIn</a>
+            <a class="btn btn-ghost" href="assets/resume.pdf" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,82.34l-56-56A8,8,0,0,0,152,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V88A8,8,0,0,0,213.66,82.34ZM160,51.31,188.69,80H160ZM200,216H56V40h88V88a8,8,0,0,0,8,8h48V216Zm-32-80a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,136Zm0,32a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,168Z"/></svg>Resume</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; <span data-year>2026</span> Izzatiin</p>
+          <p>Designed and built by Izzatiin</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="assets/js/main.js" defer></script>
+  </body>
+</html>
