@@ -1,68 +1,165 @@
 (function () {
   "use strict";
 
-  var root = document.documentElement;
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ---------- Tema terang / gelap ---------- */
-  var toggle = document.querySelector("[data-theme-toggle]");
-  var systemDark = window.matchMedia("(prefers-color-scheme: dark)");
+  /* ---------- Navigasi dock: home / works / quests / profile ---------- */
+  var views = {};
+  document.querySelectorAll("[data-view]").forEach(function (el) {
+    views[el.getAttribute("data-view")] = el;
+  });
+  var dockLinks = document.querySelectorAll("[data-dock]");
+  var baseTitle = document.title;
+  var current = null;
 
-  function currentTheme() {
-    return root.getAttribute("data-theme") || (systemDark.matches ? "dark" : "light");
+  function viewFromHash() {
+    var name = location.hash.replace("#", "");
+    return views[name] ? name : null;
   }
 
-  function syncToggle() {
-    if (!toggle) return;
-    var dark = currentTheme() === "dark";
-    toggle.setAttribute("aria-pressed", String(dark));
-    toggle.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
-  }
-
-  if (toggle) {
-    toggle.addEventListener("click", function () {
-      var next = currentTheme() === "dark" ? "light" : "dark";
-      root.setAttribute("data-theme", next);
-      try {
-        localStorage.setItem("theme", next);
-      } catch (e) {
-        /* penyimpanan diblokir: tema tetap berganti untuk sesi ini */
+  function show(name, initial) {
+    if (!views[name]) name = "home";
+    if (name === current) return;
+    current = name;
+    Object.keys(views).forEach(function (key) {
+      var el = views[key];
+      var on = key === name;
+      el.hidden = !on;
+      el.classList.remove("is-entering");
+      if (on && !initial) {
+        void el.offsetWidth;
+        el.classList.add("is-entering");
       }
-      syncToggle();
     });
-    systemDark.addEventListener("change", syncToggle);
-    syncToggle();
+    dockLinks.forEach(function (link) {
+      if (link.getAttribute("data-dock") === name) link.setAttribute("aria-current", "page");
+      else link.removeAttribute("aria-current");
+    });
+    document.title = name === "home" ? baseTitle : name.charAt(0).toUpperCase() + name.slice(1) + " - " + baseTitle.split(" - ")[0];
+    if (!initial) window.scrollTo(0, 0);
+    document.dispatchEvent(new CustomEvent("viewchange", { detail: name }));
   }
 
-  /* ---------- Garis bawah nav saat halaman digulir ---------- */
-  var nav = document.querySelector(".site-nav");
-  var sentinel = document.querySelector(".nav-sentinel");
-  if (nav && sentinel && "IntersectionObserver" in window) {
-    new IntersectionObserver(function (entries) {
-      nav.classList.toggle("is-stuck", !entries[0].isIntersecting);
-    }).observe(sentinel);
+  if (Object.keys(views).length) {
+    show(viewFromHash() || "home", true);
+    window.addEventListener("hashchange", function () {
+      var name = viewFromHash();
+      if (name) show(name);
+      else if (!location.hash) show("home");
+    });
   }
 
-  /* ---------- Animasi muncul saat digulir ---------- */
-  var revealEls = document.querySelectorAll("[data-reveal]");
-  if (reduceMotion || !("IntersectionObserver" in window)) {
-    revealEls.forEach(function (el) {
-      el.classList.add("is-visible");
+  dockLinks.forEach(function (link) {
+    link.addEventListener("click", function () {
+      link.classList.remove("is-bouncing");
+      void link.offsetWidth;
+      link.classList.add("is-bouncing");
     });
-  } else {
-    var revealObserver = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            revealObserver.unobserve(entry.target);
-          }
-        });
-      },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.12 }
-    );
-    revealEls.forEach(function (el) {
-      revealObserver.observe(el);
+    link.addEventListener("animationend", function () {
+      link.classList.remove("is-bouncing");
+    });
+  });
+
+  /* ---------- Efek mengetik di kartu proyek ---------- */
+  document.querySelectorAll("[data-type]").forEach(function (el, index) {
+    var phrases = el.getAttribute("data-type").split("|");
+    if (reduceMotion || phrases.length < 2) return;
+    var p = 0;
+    var text = phrases[0];
+    var deleting = true;
+
+    function step() {
+      // berhenti sementara kalau kartunya tidak terlihat
+      if (el.offsetParent === null) {
+        setTimeout(step, 600);
+        return;
+      }
+      var target = phrases[p];
+      if (deleting) {
+        text = text.slice(0, -1);
+        el.textContent = text;
+        if (!text) {
+          deleting = false;
+          p = (p + 1) % phrases.length;
+        }
+        setTimeout(step, 28);
+      } else {
+        target = phrases[p];
+        text = target.slice(0, text.length + 1);
+        el.textContent = text;
+        if (text === target) {
+          deleting = true;
+          setTimeout(step, 2200);
+        } else {
+          setTimeout(step, 60);
+        }
+      }
+    }
+    setTimeout(step, 2400 + index * 700);
+  });
+
+  /* ---------- Stiker yang bisa di-drag ---------- */
+  var stickers = document.querySelectorAll(".sticker");
+  stickers.forEach(function (sticker) {
+    var startX = 0;
+    var startY = 0;
+    var baseX = 0;
+    var baseY = 0;
+    var pointer = null;
+
+    function pos() {
+      return {
+        x: parseFloat(sticker.style.getPropertyValue("--x")) || 0,
+        y: parseFloat(sticker.style.getPropertyValue("--y")) || 0
+      };
+    }
+
+    sticker.addEventListener("pointerdown", function (e) {
+      pointer = e.pointerId;
+      sticker.setPointerCapture(pointer);
+      var p = pos();
+      baseX = p.x;
+      baseY = p.y;
+      startX = e.clientX;
+      startY = e.clientY;
+      sticker.classList.add("is-dragging");
+    });
+
+    sticker.addEventListener("pointermove", function (e) {
+      if (e.pointerId !== pointer) return;
+      sticker.style.setProperty("--x", baseX + e.clientX - startX + "px");
+      sticker.style.setProperty("--y", baseY + e.clientY - startY + "px");
+    });
+
+    function drop(e) {
+      if (e.pointerId !== pointer) return;
+      pointer = null;
+      sticker.classList.remove("is-dragging");
+      sticker.style.setProperty("--r", Math.round(Math.random() * 24 - 12) + "deg");
+    }
+    sticker.addEventListener("pointerup", drop);
+    sticker.addEventListener("pointercancel", drop);
+
+    // keyboard: panah untuk menggeser stiker
+    sticker.addEventListener("keydown", function (e) {
+      var moves = { ArrowLeft: [-12, 0], ArrowRight: [12, 0], ArrowUp: [0, -12], ArrowDown: [0, 12] };
+      var m = moves[e.key];
+      if (!m) return;
+      e.preventDefault();
+      var p = pos();
+      sticker.style.setProperty("--x", p.x + m[0] + "px");
+      sticker.style.setProperty("--y", p.y + m[1] + "px");
+    });
+  });
+
+  var resetBtn = document.querySelector("[data-sticker-reset]");
+  if (resetBtn) {
+    resetBtn.addEventListener("click", function () {
+      stickers.forEach(function (s) {
+        s.style.removeProperty("--x");
+        s.style.removeProperty("--y");
+        s.style.removeProperty("--r");
+      });
     });
   }
 
@@ -73,16 +170,8 @@
     tocLinks.forEach(function (link) {
       linkById[link.getAttribute("href").slice(1)] = link;
     });
-
-    var setActive = function (id) {
-      tocLinks.forEach(function (link) {
-        link.removeAttribute("aria-current");
-      });
-      if (linkById[id]) linkById[id].setAttribute("aria-current", "true");
-    };
-
     var visible = {};
-    var sectionObserver = new IntersectionObserver(
+    var observer = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (entry) {
           visible[entry.target.id] = entry.isIntersecting;
@@ -90,21 +179,19 @@
         for (var i = 0; i < tocLinks.length; i++) {
           var id = tocLinks[i].getAttribute("href").slice(1);
           if (visible[id]) {
-            setActive(id);
+            tocLinks.forEach(function (l) {
+              l.removeAttribute("aria-current");
+            });
+            tocLinks[i].setAttribute("aria-current", "true");
             break;
           }
         }
       },
-      { rootMargin: "-20% 0px -55% 0px" }
+      { rootMargin: "-15% 0px -60% 0px" }
     );
-
     Object.keys(linkById).forEach(function (id) {
       var section = document.getElementById(id);
-      if (section) sectionObserver.observe(section);
+      if (section) observer.observe(section);
     });
   }
-
-  /* ---------- Tahun di footer ---------- */
-  var year = document.querySelector("[data-year]");
-  if (year) year.textContent = String(new Date().getFullYear());
 })();
