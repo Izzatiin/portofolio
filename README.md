@@ -4,6 +4,13 @@ Website portofolio product designer, terinspirasi dari struktur [cindyly.design]
 
 Dibuat dengan HTML, CSS, dan JavaScript biasa. Tidak perlu install apa pun, dan bisa langsung di-host gratis di GitHub Pages.
 
+## Lihat website
+
+- **Live (GitHub Pages):** https://izzatiin.github.io/portofolio/
+  (aktif setelah GitHub Pages dinyalakan, lihat bagian [Publish ke GitHub Pages](#publish-ke-github-pages))
+- **Preview cepat (tanpa setting):** https://raw.githack.com/Izzatiin/portofolio/HEAD/index.html
+  (layanan pihak ketiga yang menampilkan file langsung dari repo ini; perubahan baru bisa butuh beberapa menit untuk muncul)
+
 ## Struktur
 
 ```
