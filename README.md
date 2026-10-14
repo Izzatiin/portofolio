@@ -81,7 +81,7 @@ npx serve .
 
 1. Di GitHub, buka **Settings > Pages** (https://github.com/Izzatiin/portofolio/settings/pages).
 2. Di **Build and deployment > Source**, pilih **Deploy from a branch**.
-3. Di **Branch**, pilih branch tempat file ini berada (sekarang `claude/quirky-gauss-21hhpf`, atau `main` kalau nanti kamu pindahkan ke sana), folder `/ (root)`, lalu **Save**.
+3. Di **Branch**, pilih branch utama repo ini, folder `/ (root)`, lalu **Save**.
 4. Tunggu 1-2 menit. Website akan tampil di `https://izzatiin.github.io/portofolio/`.
 
 Setiap kali ada perubahan yang di-push ke branch itu, website akan ter-update otomatis.
