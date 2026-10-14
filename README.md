@@ -19,23 +19,33 @@ work/lintas.html      Contoh studi kasus 1
 work/warungku.html    Contoh studi kasus 2
 work/rawat.html       Contoh studi kasus 3
 assets/css/style.css  Semua styling (warna & font di bagian TOKENS paling atas)
-assets/js/pet.js      Virtual pet: akuarium pixel dengan ikan cupang
+assets/js/pet.js      Virtual pet: logika akuarium pixel dengan ikan cupang
+assets/js/pet3d.js    Model 3D perangkat (three.js): badan plastik, tag nama logam, gerakan
+assets/js/pet-fx.js   Suara tombol (Web Audio) dan efek partikel
 assets/js/main.js     Navigasi dock, efek ketik di kartu, stiker drag, daftar isi studi kasus
+assets/vendor/        three.js dan font 3D untuk tag nama
 assets/img/           Gambar (sebagian besar masih placeholder, ganti dengan punyamu)
 assets/fonts/         DM Sans, DM Mono, Instrument Serif
 ```
 
 ## Virtual pet
 
-Perangkat berbentuk "kucing oren" dengan ikan cupang pixel di layarnya. Tiga tombol pink:
+Perangkat 3D berbentuk "kucing oren" dengan ikan cupang pixel di layarnya. Perangkat ini ikut miring mengikuti kursor, mengambang pelan, gantungan kuncinya berayun, dan setiap tombol mengeluarkan suara serta efek partikel. Tiga tombol pink:
 
 - **FEED**: menjatuhkan makanan, ikan berenang memakannya
 - **PLAY**: mini game tebak-tebakan. Ikan sembunyi di balik batu, tebak keluar dari kiri atau kanan
 - **SLEEP**: layar meredup dan ikan tidur (tekan lagi untuk **WAKE**)
 
-Klik layar atau tombol panah di kiri bawah perangkat untuk mode layar penuh (keyboard: F, P, S, panah kiri/kanan, Esc).
+Klik perangkatnya untuk mode layar penuh (keyboard: F, P, S, panah kiri/kanan, Esc). Tombol **sound on/off** ada di pojok kanan bawah.
 
-Mau ganti warna perangkat? Ubah `--cap`, `--cap-dark`, dan `--cap-light` di bagian `.pet` pada `style.css`. Nama di gantungan kunci ada di `<span class="pet-tag">` pada `index.html`. Warna ikan ada di `FISH_COLORS` pada `pet.js`.
+Pengaturan yang bisa kamu ubah:
+
+- **Nama di gantungan kunci**: teks di `<span class="pet-tag">` pada `index.html` (huruf a-z, A-Z, angka).
+- **Warna perangkat 3D**: objek `mat` di `assets/js/pet3d.js` (misalnya `cap` untuk warna oranye).
+- **Warna ikan**: `FISH_COLORS` di `assets/js/pet.js`.
+- **Suara**: fungsi di `SOUNDS` pada `assets/js/pet-fx.js`.
+
+Model 3D butuh WebGL dan server (GitHub Pages atau `npx serve .`). Kalau dibuka langsung dari file atau browsernya tidak mendukung WebGL, otomatis tampil versi 2D.
 
 ## Yang perlu kamu ganti
 
@@ -71,7 +81,7 @@ Buka `assets/css/style.css`, lalu ubah variabel di bagian `TOKENS`:
 
 ## Melihat di komputer sendiri
 
-Cukup buka `index.html` di browser. Atau jalankan server lokal:
+Jalankan server lokal (model 3D butuh server, kalau `index.html` dibuka langsung yang tampil versi 2D):
 
 ```bash
 npx serve .
@@ -91,3 +101,4 @@ Setiap kali ada perubahan yang di-push ke branch itu, website akan ter-update ot
 - Desain terinspirasi dari portofolio [Cindy Ly](https://www.cindyly.design/)
 - Font [DM Sans](https://github.com/googlefonts/dm-fonts), [DM Mono](https://github.com/googlefonts/dm-mono), dan [Instrument Serif](https://github.com/Instrument/instrument-serif) (SIL Open Font License, lihat `assets/fonts/`)
 - Ikon dari [Phosphor Icons](https://phosphoricons.com/) (MIT License)
+- 3D dengan [three.js](https://threejs.org/) (MIT License, lihat `assets/vendor/three/LICENSE`)

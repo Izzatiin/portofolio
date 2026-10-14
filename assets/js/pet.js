@@ -335,6 +335,7 @@
         banner("GAME OVER", 14);
       }
     }
+    for (var i = 0; i < renderHooks.length; i++) renderHooks[i]();
   }
 
   /* ---------- behaviour ---------- */
@@ -393,6 +394,7 @@
         state.food.splice(state.food.indexOf(target), 1);
         state.hunger = Math.max(0, state.hunger - 14);
         spawnHeart(Math.round(target.x - 2), Math.round(target.y - 8));
+        emit("eat", { x: target.x, y: target.y });
       }
     } else {
       if (moveFish(f.speed) || state.tick % 140 === 0) pickTarget();
@@ -446,6 +448,7 @@
     state.fish.tx = HIDE_X;
     state.fish.ty = HIDE_Y;
     setLabels();
+    emit("play");
     say("Game started. The fish hides behind the rock. Guess left or right.");
   }
 
@@ -454,6 +457,7 @@
     state.game = null;
     pickTarget();
     setLabels();
+    emit("exit");
     say("Back to the aquarium.");
   }
 
@@ -469,10 +473,12 @@
     if (g.correct) {
       g.coins += 1;
       spawnHeart(HIDE_X + g.side * 26 - 2, HIDE_Y - 20);
+      emit("correct", { x: HIDE_X + g.side * 26, y: HIDE_Y - 10, coins: g.coins });
       say("Correct! Coins: " + g.coins + ".");
     } else {
       g.hearts -= 1;
       state.particles.push({ kind: "x", x: HIDE_X + side * 26 - 1, y: HIDE_Y - 4, life: 30, max: 30 });
+      emit("wrong", { x: HIDE_X + side * 26, y: HIDE_Y - 4, hearts: g.hearts });
       say("Not there. Hearts left: " + g.hearts + ".");
     }
   }
@@ -498,6 +504,7 @@
         if (g.hearts <= 0) {
           g.phase = "over";
           g.timer = 0;
+          emit("over", { coins: g.coins });
           say("Game over. You collected " + g.coins + " coins.");
         } else {
           g.phase = "hide";
@@ -516,6 +523,7 @@
   function feed() {
     if (state.asleep) wake();
     for (var i = 0; i < 3; i++) state.food.push({ x: rand(16, W - 18), y: 3 + i * 2, rest: 0 });
+    emit("feed");
     say("You dropped some food in the water.");
   }
 
@@ -523,6 +531,7 @@
     state.asleep = true;
     state.food = [];
     setLabels();
+    emit("sleep");
     say("The fish is asleep.");
   }
 
@@ -531,6 +540,7 @@
     state.zs = [];
     pickTarget();
     setLabels();
+    emit("wake");
     say("The fish is awake.");
   }
 
@@ -543,6 +553,7 @@
       }, 120);
     }
     touch();
+    emit("press", { key: key });
     if (state.mode === "game") {
       if (key === "a") guess(-1);
       else if (key === "b") exitGame();
@@ -570,10 +581,17 @@
       buttons[k].setAttribute("data-label", labels[k][0]);
       buttons[k].setAttribute("aria-label", labels[k][1]);
     });
+    emit("labels", { a: labels.a[0], b: labels.b[0], c: labels.c[0] });
   }
 
   function say(msg) {
     if (live) live.textContent = msg;
+  }
+
+  /* Event untuk efek suara, partikel, dan model 3D (lihat pet-fx.js & pet3d.js) */
+  var renderHooks = [];
+  function emit(name, detail) {
+    document.dispatchEvent(new CustomEvent("pet:" + name, { detail: detail || {} }));
   }
 
   /* ---------- full screen mode ---------- */
@@ -596,6 +614,7 @@
     document.body.classList.add("pet-open");
     stage.style.transform = fit();
     touch();
+    emit("open");
     if (closeBtn) closeBtn.focus({ preventScroll: true });
   }
 
@@ -604,6 +623,7 @@
     state.open = false;
     document.body.classList.remove("pet-open");
     stage.style.transform = "";
+    emit("close");
     if (openBtn) openBtn.focus({ preventScroll: true });
     schedule();
   }
@@ -661,14 +681,10 @@
     }
   });
 
-  screenEl.addEventListener("click", function (e) {
-    if (!state.open) {
-      openPet();
-      return;
-    }
-    var r = canvas.getBoundingClientRect();
-    var x = ((e.clientX - r.left) / r.width) * W;
-    var y = ((e.clientY - r.top) / r.height) * H;
+  /* u, v = posisi tap di layar (0..1) */
+  function tap(u, v) {
+    var x = u * W;
+    var y = v * H;
     touch();
     if (state.mode === "game") {
       guess(x < W / 2 ? -1 : 1);
@@ -676,7 +692,17 @@
       state.fish.tx = Math.max(10, Math.min(W - 10, x));
       state.fish.ty = Math.max(8, Math.min(SAND_Y - 8, y));
       spawnBubble(Math.round(x), Math.round(y));
+      emit("tap", { x: x, y: y });
     }
+  }
+
+  screenEl.addEventListener("click", function (e) {
+    if (!state.open) {
+      openPet();
+      return;
+    }
+    var r = canvas.getBoundingClientRect();
+    tap((e.clientX - r.left) / r.width, (e.clientY - r.top) / r.height);
   });
 
   if (openBtn) openBtn.addEventListener("click", openPet);
@@ -710,6 +736,28 @@
       schedule();
     }).observe(canvas);
   }
+
+  window.PixelPet = {
+    canvas: canvas,
+    width: W,
+    height: H,
+    press: press,
+    tap: tap,
+    open: openPet,
+    close: closePet,
+    isOpen: function () {
+      return state.open;
+    },
+    label: function (k) {
+      return buttons[k] ? buttons[k].getAttribute("data-label") : "";
+    },
+    onRender: function (fn) {
+      renderHooks.push(fn);
+    },
+    refit: function () {
+      if (state.open) stage.style.transform = fit();
+    }
+  };
 
   pickTarget();
   setLabels();
