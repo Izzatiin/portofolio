@@ -298,17 +298,20 @@ button {
   display: none;
 }
 
+/* Animasi masuk hanya untuk konten. Tombol tetap (tutup, petunjuk, suara)
+   tidak ikut, dan fill-mode "backwards" supaya opacity aslinya kembali
+   berlaku setelah animasi selesai. */
 @media (prefers-reduced-motion: no-preference) {
-  .view.is-entering > * {
-    animation: view-in 0.7s var(--ease) both;
+  .view.is-entering > :is(.hero, .works-grid, .view-head, .windows, .scrapbook, .profile) {
+    animation: view-in 0.7s var(--ease) backwards;
   }
-  .view.is-entering > *:nth-child(2) {
+  .view.is-entering > :nth-child(2) {
     animation-delay: 60ms;
   }
-  .view.is-entering > *:nth-child(3) {
+  .view.is-entering > :nth-child(3) {
     animation-delay: 120ms;
   }
-  .view.is-entering > *:nth-child(4) {
+  .view.is-entering > :nth-child(4) {
     animation-delay: 180ms;
   }
 }
@@ -654,6 +657,7 @@ button {
   font-size: 22px;
   opacity: 0;
   pointer-events: none;
+  transition: opacity 0.3s var(--ease), background-color 0.2s var(--ease), transform 0.2s var(--spring);
 }
 
 .pet-hint {
@@ -835,6 +839,7 @@ body.pet-open .pet-collapse,
 body.pet-open .pet-hint {
   opacity: 1;
   pointer-events: auto;
+  transition-delay: 0.25s;
 }
 .hero-left,
 .hero-right {
