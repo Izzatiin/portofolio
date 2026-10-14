@@ -60,10 +60,12 @@ npx serve .
 
 ## Publish ke GitHub Pages
 
-1. Merge branch ini ke `main`.
-2. Di GitHub, buka **Settings > Pages**.
-3. Di **Build and deployment**, pilih **Deploy from a branch**, branch `main`, folder `/ (root)`, lalu **Save**.
-4. Tunggu sebentar. Website akan tampil di `https://izzatiin.github.io/portofolio/`.
+1. Di GitHub, buka **Settings > Pages** (https://github.com/Izzatiin/portofolio/settings/pages).
+2. Di **Build and deployment > Source**, pilih **Deploy from a branch**.
+3. Di **Branch**, pilih branch tempat file ini berada (sekarang `claude/quirky-gauss-21hhpf`, atau `main` kalau nanti kamu pindahkan ke sana), folder `/ (root)`, lalu **Save**.
+4. Tunggu 1-2 menit. Website akan tampil di `https://izzatiin.github.io/portofolio/`.
+
+Setiap kali ada perubahan yang di-push ke branch itu, website akan ter-update otomatis.
 
 ## Kredit
 
